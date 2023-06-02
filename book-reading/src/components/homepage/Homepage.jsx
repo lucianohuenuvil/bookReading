@@ -1,12 +1,11 @@
 import React from 'react'
+import { BookList } from '../book/BookList';
+
 
 export const Homepage = () => {
+
+
   return (
-    <div>
-        
-        
-
-
-    </div>
+      <BookList></BookList>
   )
 }

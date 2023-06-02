@@ -1,30 +1,54 @@
 import React, { useEffect, useState } from 'react'
+import { getBooks } from '../helpers/getBooks';
+import { getBookById } from '../helpers/getBookById';
 
-export const useFetchBooks = () => {
+export const useFetchBooks = (id = false) => {
 
+    const [state, setState] = useState({
+      isLoading: true,
+      books:[]
+    })
 
-    const url = 'https://anapioficeandfire.com/api/books';
+    
+    const getBook = async () => {
 
-    const [books, setBooks] = useState([])
+        const books_request = await getBooks()
 
+          setTimeout( () => {
+  
+            setState({
+              isLoading:false,
+              books:books_request
+            });
+  
+        }, 2000);
+        
+    }
 
-    const getBooks = async () => {
+    const getBookInfo = async() => {
+      const books_request = await getBookById(id)
 
+      setTimeout( () => {
 
-        // const books = await 
+        setState({
+          isLoading:false,
+          books:books_request
+        });
 
-        // setBooks()
+    }, 1000);
+
     }
 
 
-    // useEffect
+    useEffect(() => {
 
+      if(!id)
+        getBook();
+      else
+        getBookInfo();
 
+    }, [])
+    
 
-
-
-  return {
-    books: [],
-    isLoading: false
-  }
+  return state
 }
