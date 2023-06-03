@@ -1,17 +1,26 @@
 import React, { useEffect } from 'react'
 import { useFetchBooks } from '../../hooks/useFetchBooks'
 import { BookItem } from './BookItem';
+import { Table } from './Table';
+
+
+
 
 export const BookList = () => {
 
   const {isLoading, books} = useFetchBooks();
 
 
+
   return (
-   
+
     <div>
 
-      <h1>Lista de Libros</h1>
+      <h1>My Table</h1>
+
+      <Table></Table>
+
+      {/* <h1>Lista de Libros</h1>
 
       { 
         isLoading 
@@ -23,7 +32,7 @@ export const BookList = () => {
              ))}
         </div> 
       
-      }
+      } */}
 
 
     </div>

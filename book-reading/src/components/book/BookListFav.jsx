@@ -12,8 +12,7 @@ export const BookListFav = () => {
         {
             book.map( books => (
                 <Bookdetail key={books.name} {...books}></Bookdetail>
-            )   
-        )
+            ))
         }
 
 
