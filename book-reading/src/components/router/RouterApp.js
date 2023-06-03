@@ -22,7 +22,7 @@ export const RouterApp = () => {
           <Route path="addBook" element ={<AddBook/>} />
           <Route path="/detail/api/books/:id" element ={<BookInfo/>} />
           <Route path="/favorites" element ={<BookListFav/>} />
-          <Route path="/*" element={ <Navigate to ="/" />  } />  
+          {/* <Route path="/*" element={ <Navigate to ="/" />  } />   */}
 
         </Routes>
     </BrowserRouter>

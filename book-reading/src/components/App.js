@@ -10,18 +10,18 @@ export const App = () => {
   }
 
 
-  const [book, setBook] = useState(getBooksFav);
+  const [books, setBook] = useState(getBooksFav);
 
 
   useEffect(() => {
-    localStorage.setItem('books-fav', JSON.stringify(book))
-  }, [book])
+    localStorage.setItem('books-fav', JSON.stringify(books))
+  }, [books])
   
 
 
   return (
 
-      <Context.Provider value={{book, setBook}}>
+      <Context.Provider value={{books, setBook}}>
           <RouterApp></RouterApp>
       </Context.Provider>
     

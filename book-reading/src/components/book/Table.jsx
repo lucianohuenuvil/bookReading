@@ -1,27 +1,14 @@
 import React, { useMemo, useEffect } from 'react';
 import { useTable, useGlobalFilter } from 'react-table';
 import { Filter } from '../filter/Filter';
+import { Link } from 'react-router-dom';
 
-export const Table = () => {
+export const Table = ({props}) => {
 
+  const data = useMemo( () => props.books.map( book => {return book}),[])
 
-  const data = useMemo(
-    () =>   [
-      { name: 'John Doe', age: 25 },
-      { name: 'Jane Smith', age: 30 },
-      { name: 'Bob Johnson', age: 35 },
-    ],
-    []
-  )
+  const columns = useMemo(() => props.columns.map( col => {return col}),[]);
 
-
-  const columns = useMemo(
-    () => [
-      { Header: 'Name', accessor: 'name' },
-      { Header: 'Age', accessor: 'age' },
-    ],
-    []
-  );
 
   const {
     getTableProps,
@@ -35,11 +22,14 @@ export const Table = () => {
     
   } = useTable({ columns, data }, useGlobalFilter);
 
+
   const { globalFilter } = state;
 
 
   return (
     <div>
+
+      
       <Filter filter={globalFilter} setFilter={setGlobalFilter} />
 
       <table {...getTableProps()}>
@@ -57,9 +47,24 @@ export const Table = () => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))}
+
+                    {row.cells.map(cell => (
+                      <td {...cell.getCellProps()}> 
+
+                         {
+
+                          // console.log(cell.value.toString().includes("george"))
+                          cell.value.toString().includes("/api")
+                          ?
+                          <Link className='link link-nav' to={`detail${cell.value}`}>Ver Información</Link>
+                          :
+                          cell.render('Cell')
+
+                         }
+                      </td>
+                    ))}
+
+
               </tr>
             );
           })}

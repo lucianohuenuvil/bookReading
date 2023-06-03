@@ -1,6 +1,14 @@
 export const getBooks = async (  ) => {
 
 
+    const url = (url) => {
+
+        const {pathname} = new URL(url)
+
+        return pathname
+    }
+
+
     try{
         const request = await fetch(`https://anapioficeandfire.com/api/books`);
     
@@ -12,7 +20,8 @@ export const getBooks = async (  ) => {
             const books =  data.map( book => {
                 return {
                     name:book.name,
-                    url:book.url
+                    author:book.authors,
+                    url: url(book.url)
                 }
             })
             return books;

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetchBooks } from '../../hooks/useFetchBooks'
-import { BookItem } from './BookItem'
 import { Context } from '../context/Context'
 
 // console.log(useParams)
@@ -33,7 +32,6 @@ export const BookInfo = () => {
       ? <p>CARGANDO....</p>
       : <div>
 
-        {/* <BookItem {...books}></BookItem> */}
         {books.name}
         {books.authors}
         {books.country}
