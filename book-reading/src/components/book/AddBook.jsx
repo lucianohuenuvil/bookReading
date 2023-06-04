@@ -25,7 +25,7 @@ export const AddBook = () => {
 
       if (!values.genero)
         errors.genero = "El campo es obligatorio";
-      else if (values.autor.length < 5)
+      else if (values.genero.length < 5)
         errors.genero = "El campo de genero es muy corto";
 
       if (!values.fecha_public)
@@ -51,36 +51,48 @@ export const AddBook = () => {
 
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-
-      <label>Titulo</label>
-      <input type="text" {...formik.getFieldProps('titulo')}/>
-      {formik.touched.titulo && formik.errors.titulo ? <div> {formik.errors.titulo}</div> : null}
 
 
-      <br />
-
-      <label>Autor</label>
-      <input type="text" {...formik.getFieldProps('autor')}/>
-      {formik.touched.autor && formik.errors.autor ? <div> {formik.errors.autor}</div> : null}
-
-      <br />
-
-      <label>Genero</label>
-      <input type="text" {...formik.getFieldProps('genero')}/>
-      {formik.touched.genero && formik.errors.genero ? <div> {formik.errors.genero}</div> : null}
-
-      <br />
-
-      <label>Fecha Publicación</label>
-      <input type="date" {...formik.getFieldProps('fecha_public')}/>
-      {formik.touched.fecha_public && formik.errors.fecha_public ? <div> {formik.errors.fecha_public}</div> : null}
+    <div className='container mx-auto'>
 
 
-      <br /> 
+      <form onSubmit={formik.handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
-      <input type="submit" value="enviar"/>
+        <h1 className='p-4 text-gray-700 text-sm font-bold mb-2 text-center-'>Validación de formulario</h1>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">Título</label>
+          <input {...formik.getFieldProps('titulo')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Ingresa el nombre del libro"/>
 
-    </form>
+          {formik.touched.titulo && formik.errors.titulo ? <p className="text-red-500 text-xs italic"> {formik.errors.titulo}</p> : null}
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2" >Género del libro</label>
+          <input {...formik.getFieldProps('genero')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Ingresa el género de libro"/>
+          {formik.touched.genero && formik.errors.genero ? <p className="text-red-500 text-xs italic"> {formik.errors.genero}</p> : null}
+
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2" >Autor</label>
+          <input {...formik.getFieldProps('autor')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Ingresa el nombre del autor"/>
+          {formik.touched.autor && formik.errors.autor ? <p className="text-red-500 text-xs italic"> {formik.errors.autor}</p> : null}
+
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2" >Fecha de publicación</label>
+          <input {...formik.getFieldProps('fecha_public')} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"  type="date"/>
+
+          {formik.touched.fecha_public && formik.errors.fecha_public ? <p className="text-red-500 text-xs italic"> {formik.errors.fecha_public}</p> : null}
+        </div>
+
+
+
+        <div className="flex items-center justify-between">
+          <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Enviar"/>
+
+        </div>
+      </form>
+ 
+    </div>
+
   )
 }

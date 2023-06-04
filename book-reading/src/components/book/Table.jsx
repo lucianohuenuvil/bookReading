@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useTable, useGlobalFilter } from 'react-table';
 import { Filter } from '../filter/Filter';
 import { Link } from 'react-router-dom';
@@ -27,49 +27,46 @@ export const Table = ({props}) => {
 
 
   return (
-    <div>
-
-      
+    
+    <>
       <Filter filter={globalFilter} setFilter={setGlobalFilter} />
 
-      <table {...getTableProps()}>
+      <table className= 'w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200'{...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr className='bg-gray-200' {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th className='border border-gray-400 px-4 py-2' {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
+
           {rows.map(row => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr className='bg-gray-200' {...row.getRowProps()}>
+                {row.cells.map(cell => (
+                  <td className='border border-gray-400 px-4 py-2' {...cell.getCellProps()}> 
 
-                    {row.cells.map(cell => (
-                      <td {...cell.getCellProps()}> 
-
-                         {
-
-                          // console.log(cell.value.toString().includes("george"))
-                          cell.value.toString().includes("/api")
-                          ?
-                          <Link className='link link-nav' to={`detail${cell.value}`}>Ver Información</Link>
-                          :
-                          cell.render('Cell')
-
-                         }
-                      </td>
-                    ))}
-
-
+                      {
+                        cell.value.toString().includes("/api")
+                        ?
+                        <Link className='link link-nav' to={`detail${cell.value}`}>Ver Información</Link>
+                        :
+                        cell.render('Cell')
+                      }
+                  </td>
+                ))}
               </tr>
             );
+
           })}
         </tbody>
       </table>
-    </div>
+
+    </>
+
   );
 };

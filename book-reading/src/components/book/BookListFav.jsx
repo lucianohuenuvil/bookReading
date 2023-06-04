@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { Context } from '../context/Context'
-import { Bookdetail } from './Bookdetail'
 import { Table } from './Table'
 
 export const BookListFav = () => {
 
-    const { books } = useContext(Context)
+    const context = useContext(Context)
+
+    const books = context.localBooks;
 
     const columns = [
       { Header: 'Code-ISBN', accessor: 'isbn' },
@@ -21,6 +22,8 @@ export const BookListFav = () => {
 
 
   return (
-    <Table props={{books, columns}}></Table>
+    <div  className='container mx-auto'>
+      <Table props={{books, columns}}></Table>
+    </div>
   )
 }

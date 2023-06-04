@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFetchBooks } from '../../hooks/useFetchBooks'
 import { Table } from './Table';
-
-
+import { Loading } from '../loading/Loading';
 
 
 export const BookList = () => {
@@ -19,13 +18,13 @@ export const BookList = () => {
   
   return (
 
-    <div>
+    <div className='container mx-auto'>
 
-      <h1>Lista de Libros: </h1>
+      <h1 className="bg-blue-500 text-white p-3">Lista de Libros: </h1>
 
       { 
         isLoading 
-        ? <p> CARGANDO....</p>
+        ? <Loading></Loading>
 
         :  <Table props={{books, columns}}></Table>
       }
