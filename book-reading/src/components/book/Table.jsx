@@ -11,10 +11,8 @@ export const Table = ({props}) => {
 
 
   const {
-    getTableProps,
     getTableBodyProps,
     headerGroups,
-    footerGroups,
     rows,
     state,
     setGlobalFilter,
@@ -31,40 +29,59 @@ export const Table = ({props}) => {
     <>
       <Filter filter={globalFilter} setFilter={setGlobalFilter} />
 
-      <table className= 'w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200'{...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr className='bg-gray-200' {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th className='border border-gray-400 px-4 py-2' {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+      <section className="flex flex-col justify-center antialiased bg-gray-100 text-gray-600 p-4">
 
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <tr className='bg-gray-200' {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td className='border border-gray-400 px-4 py-2' {...cell.getCellProps()}> 
+        <div className="w-full  mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+          <header className="px-5 py-4 border-b border-gray-100">
+            <h2 className="font-semibold text-gray-800">LIBROS:</h2>
+          </header>
+          <div className="p-3">
+            <div className="overflow-x-auto">
+              <table className="table-auto w-full">
+                  <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
 
-                      {
-                        cell.value.toString().includes("/api")
-                        ?
-                        <Link className='link link-nav' to={`detail${cell.value}`}>Ver Información</Link>
-                        :
-                        cell.render('Cell')
-                      }
-                  </td>
-                ))}
-              </tr>
-            );
+                    {headerGroups.map(headerGroup => (
+                      <tr className='' {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map(column => (
+                          <th className='p-2 whitespace-nowrap' {...column.getHeaderProps()}>{column.render('Header')}</th>
+                        ))}
+                      </tr>
+                    ))}
 
-          })}
-        </tbody>
-      </table>
+                  </thead>
+
+                  <tbody className='text-sm divide-y divide-gray-100' {...getTableBodyProps()}>
+                    {rows.map(row => {
+                      prepareRow(row);
+                      return (
+                        <tr {...row.getRowProps()}>
+                          {row.cells.map(cell => (
+                            <td className='p-2 whitespace-nowrap text-center' {...cell.getCellProps()}> 
+
+                                {
+                                  cell.value.toString().includes("/api")
+                                  ?
+                                  <Link className='link link-nav' to={`detail${cell.value}`}>
+                                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Ver detalles
+                                    </button>
+                                  </Link>
+                                  :
+                                  cell.render('Cell')
+                                }
+                            </td>
+                          ))}
+                        </tr>
+                      );
+
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+</section>
 
     </>
 
