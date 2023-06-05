@@ -23,6 +23,7 @@ export const BookListFav = () => {
 
   return (
     <div  className='container mx-auto'>
+      <h1 className="bg-blue-500 text-white p-3">Mis favoritos: </h1>
       <Table props={{books, columns}}></Table>
     </div>
   )

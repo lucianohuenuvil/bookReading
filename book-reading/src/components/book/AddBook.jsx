@@ -52,8 +52,11 @@ export const AddBook = () => {
 
   return (
 
+    
 
     <div className='container mx-auto'>
+
+<h1 className="bg-blue-500 text-white p-3">Agregar libro: </h1>
 
 
       <form onSubmit={formik.handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
