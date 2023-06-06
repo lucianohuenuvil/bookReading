@@ -23,9 +23,8 @@ export const getBookById = async( id ) => {
     
         }
     
-        return {
-            books:[]
-        }
+        return
+            
 
     } catch(err){
         console.log(err)

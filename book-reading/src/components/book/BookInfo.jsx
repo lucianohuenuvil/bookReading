@@ -3,22 +3,21 @@ import { useParams } from 'react-router-dom'
 import { useFetchBooks } from '../../hooks/useFetchBooks'
 import { Context } from '../context/Context'
 import { Loading } from '../loading/Loading'
+import { ErrorMessage } from '../loading/ErrorMessage'
 
 export const BookInfo = () => {
 
    
   const {id} = useParams()
 
-  const {isLoading, books} = useFetchBooks(id);
+  const {isLoading, books, error} = useFetchBooks(id);
 
   const {localBooks, setLocalbooks} = useContext(Context)
 
 
   const addFav = () => {
 
-    // console.log(localBooks.includes(books))
-
-    if (!localBooks.find( bk => bk.isbn == books.isbn)){
+    if (!localBooks.find( bk => bk.isbn === books.isbn)){
       setLocalbooks([...localBooks, books])
       alert("Se ha agregado correctamente a la lista de favoritos")
     }
@@ -145,7 +144,13 @@ export const BookInfo = () => {
               </li>
             </ul>
           </div>
-         }
+        }
+
+        {
+          error
+          && <ErrorMessage></ErrorMessage>
+        }     
+
       </div>
     </div>
 
